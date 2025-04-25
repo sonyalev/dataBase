@@ -1,4 +1,4 @@
-ALTER TABLE air_quality
+ALTER TABLE weather
 DROP COLUMN air_quality_pm2_5,
 DROP COLUMN air_quality_pm10,
 DROP COLUMN air_quality_carbon_monoxide,
