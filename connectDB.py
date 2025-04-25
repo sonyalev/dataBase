@@ -1,8 +1,7 @@
 import psycopg2
-from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData
+from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-# 2 етап
 
 #підключаємося до новоствореної бази даних
 conn = psycopg2.connect("dbname=bdlab3 user=postgres password=admin")

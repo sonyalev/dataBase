@@ -1,0 +1,9 @@
+ALTER TABLE air_quality
+DROP COLUMN air_quality_pm2_5,
+DROP COLUMN air_quality_pm10,
+DROP COLUMN air_quality_carbon_monoxide,
+DROP COLUMN air_quality_ozone,
+DROP COLUMN air_quality_nitrogen_dioxide,
+DROP COLUMN air_quality_sulphur_dioxide,
+DROP COLUMN air_quality_us_epa_index,
+DROP COLUMN air_quality_gb_defra_index;

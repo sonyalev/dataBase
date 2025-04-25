@@ -1,6 +1,5 @@
 import psycopg2
 
-# 1 етап -  створення бази даних
 
 #підключення до PostgreSQL
 conn = psycopg2.connect(
