@@ -16,7 +16,6 @@ def main():
     #
     # read_data(Session)
 
-    run_flyway_migrations()
 
 if __name__ == '__main__':
     main()
