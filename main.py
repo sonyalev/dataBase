@@ -1,12 +1,8 @@
 import re
-
 from connectDB import connect_db
 from models import Weather, AirQuality
-from readData import read_data
-from createDB import create_database
-from migration import migrate
 
-#  Albania    2024-05-16
+
 def find_weather_info(session):
     """Функція для пошуку погоди за країною та датою."""
     while True:
@@ -23,24 +19,28 @@ def find_weather_info(session):
         else:
             print("Не правильно введені дані. Введіть дату у форматі YYYY-MM-DD")
 
-    # Запит для знаходження погодних даних та даних про якість повітря
+
     weather_info = session.query(Weather).join(AirQuality, AirQuality.weather_id == Weather.id).filter(
         Weather.country == country_input,
         Weather.last_updated == date_input
     ).first()
 
     if weather_info:
+        print("\n------------------------------------------------------------\n")
         print(f"\nПогода в {weather_info.country} на {weather_info.last_updated}:")
         print(f"  Швидкість вітру: {weather_info.wind_kph} км/год")
         print(f"  Напрям вітру: {weather_info.wind_direction.name}")
         print(f"  Час сходу сонця: {weather_info.sunrise}")
+        print("\n------------------------------------------------------------\n")
 
-        # Якщо є інформація про якість повітря
+
         if weather_info.air_quality:
+            print("\n------------------------------------------------------------\n")
             print("\nЯкість повітря:")
             print(f"  CO: {weather_info.air_quality.air_quality_carbon_monoxide}")
             print(f"  Озон: {weather_info.air_quality.air_quality_ozone}")
             print(f"  Чи варто виходити на вулицю: {'Так' if weather_info.air_quality.going_outside else 'Ні'}")
+            print("\n------------------------------------------------------------\n")
         else:
             print("Дані про якість повітря відсутні")
     else:
