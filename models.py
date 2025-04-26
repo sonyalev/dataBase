@@ -26,6 +26,7 @@ class AirQuality(Base):
     __tablename__ = "air_quality"
 
     id = Column(Integer, primary_key=True)
+    weather_id = Column(Integer, ForeignKey('weather.id'))
     air_quality_carbon_monoxide = Column(Float)
     air_quality_ozone = Column(Float)
     air_quality_nitrogen_dioxide = Column(Float)
@@ -34,6 +35,8 @@ class AirQuality(Base):
     air_quality_pm10 = Column(Float)
     air_quality_us_epa_index = Column(Integer)
     air_quality_gb_defra_index = Column(Integer)
+
+    weather = relationship("Weather", back_populates="air_quality_record")
 
 
 
@@ -54,4 +57,7 @@ class Weather(Base):
 
     #встановлення зв'язку з таблицею air_quality
     air_quality = relationship("AirQuality")
+
+    air_quality_record = relationship("AirQuality", back_populates="weather", uselist=False,
+                                      foreign_keys=[AirQuality.weather_id])
 
