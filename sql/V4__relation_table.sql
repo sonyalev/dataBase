@@ -6,3 +6,11 @@ ADD COLUMN air_quality_id INT;
 ALTER TABLE weather
 ADD CONSTRAINT fk_air_quality
 FOREIGN KEY (air_quality_id) REFERENCES air_quality(id);
+
+UPDATE weather w
+SET air_quality_id = aq.id
+FROM air_quality aq
+WHERE w.id = aq.weather_id;
+
+
+
