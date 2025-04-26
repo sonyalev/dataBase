@@ -5,7 +5,7 @@ from migration import migrate
 
 def main():
 
-    #create_database()
+    create_database()
 
     #підключаємось до бази та отримуємо об'єкти
     conn, cursor, engine, Session = connect_db()
