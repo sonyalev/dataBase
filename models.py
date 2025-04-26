@@ -26,7 +26,7 @@ class AirQuality(Base):
     __tablename__ = "air_quality"
 
     id = Column(Integer, primary_key=True)
-    air_quality_carbon_conoxide = Column(Float)
+    air_quality_carbon_monoxide = Column(Float)
     air_quality_ozone = Column(Float)
     air_quality_nitrogen_dioxide = Column(Float)
     air_quality_sulphur_dioxide = Column(Float)
@@ -48,14 +48,6 @@ class Weather(Base):
     last_updated = Column(Date)
     sunrise = Column(Time)
 
-
-    id = Column(Integer, primary_key=True)
-    country = Column(String)
-    wind_degree = Column(Integer)
-    wind_kph = Column(Float)
-    wind_direction = Column(Enum(WindDirection))
-    last_updated = Column(Date)
-    sunrise = Column(Time)
 
     #зовнішній ключ до таблиці air_quality
     air_quality_id = Column(Integer, ForeignKey("air_quality.id"))

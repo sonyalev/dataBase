@@ -9,4 +9,4 @@ cursor = conn.cursor()
 
  #створює об'єкт engine, який підключається до файлової бази даних
 engine = create_engine('postgresql+psycopg2://postgres:admin@localhost:5432/bdlab3', echo=True)
-Session = sessionmaker(bind=engine)   # Готуєш "шаблон" сесій
+Session = sessionmaker(bind=engine)
