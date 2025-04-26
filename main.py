@@ -1,12 +1,20 @@
-from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData
-import psycopg2
-from sqlalchemy.orm import declarative_base, sessionmaker
-from models import Base
-from connectDB import engine
+from connectDB import connect_db
+from readData import read_data
+from createDB import create_database
+from migration import migrate
 
-#4 етап
-meta = MetaData()
+def main():
 
-#створення таблиці
-Base.metadata.create_all(engine)
+    #create_database()
 
+    #підключаємось до бази та отримуємо об'єкти
+    conn, cursor, engine, Session = connect_db()
+
+
+    migrate(engine)
+
+
+    read_data(Session)
+
+if __name__ == '__main__':
+    main()
