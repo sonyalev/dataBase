@@ -1,7 +1,7 @@
 from connectDB import connect_db
 from readData import read_data
 from createDB import create_database
-from migration import migrate, run_flyway_migrations
+from migration import migrate
 
 def main():
 
