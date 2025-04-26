@@ -14,3 +14,4 @@ WHERE w.id = aq.weather_id;
 
 
 
+
