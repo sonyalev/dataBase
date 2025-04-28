@@ -1,6 +1,6 @@
 import re
 from connectDB import connect_db, connect_MySQLdb
-from migration import migrate_data
+from migration import migrate_data, run_flyway_migrations
 from models import Weather, AirQuality, Base
 
 
@@ -53,6 +53,8 @@ def find_weather_info(session):
 
 
 def main():
+
+    #run_flyway_migrations()
 
     #підключаємось до бази та отримуємо об'єкти
     conn_postgresql, cursor_postgresql, engine_postgresql, Session_postgresql = connect_db()
