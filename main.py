@@ -12,8 +12,7 @@ def main():
 
 
     # migrate(engine)
-    #
-    #
+
     # read_data(Session)
 
     run_flyway_migrations()
