@@ -1,17 +1,17 @@
 from connectDB import connect_db
 from readData import read_data
 from createDB import create_database
-from migration import migrate
+from migration import create_table
 
 def main():
 
-    create_database()
+    #create_database()
 
     #підключаємось до бази та отримуємо об'єкти
     conn, cursor, engine, Session = connect_db()
 
 
-    migrate(engine)
+    create_table(engine)
 
 
     read_data(Session)
