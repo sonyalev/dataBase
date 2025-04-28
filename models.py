@@ -3,6 +3,8 @@ import enum
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
+
+
 class WindDirection(enum.Enum):
     N = "N"
     NNW = "NNW"
@@ -45,7 +47,7 @@ class Weather(Base):
     __tablename__ = 'weather'
 
     id = Column(Integer, primary_key=True)
-    country = Column(String)
+    country = Column(String(255))
     wind_degree = Column(Integer)
     wind_kph = Column(Float)
     wind_direction = Column(Enum(WindDirection))

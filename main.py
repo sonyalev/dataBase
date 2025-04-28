@@ -1,6 +1,7 @@
 import re
-from connectDB import connect_db
-from models import Weather, AirQuality
+from connectDB import connect_db, connect_MySQLdb
+from migration import migrate_data
+from models import Weather, AirQuality, Base
 
 
 def find_weather_info(session):
@@ -48,24 +49,26 @@ def find_weather_info(session):
 
 
 
+
+
+
 def main():
 
-    #create_database()
-
     #підключаємось до бази та отримуємо об'єкти
-    conn, cursor, engine, Session = connect_db()
+    conn_postgresql, cursor_postgresql, engine_postgresql, Session_postgresql = connect_db()
+    conn_mysql, cursor_mysql, engine_mysql, Session_mysql = connect_MySQLdb()
 
 
-    # migrate(engine)
-    #
-    #
-    # read_data(Session)
+    Base.metadata.create_all(engine_mysql)
 
-    session = Session()
+    session_postgresql = Session_postgresql()
+    session_mysql = Session_mysql()
 
-    find_weather_info(session)
+    migrate_data(session_postgresql, session_mysql)
 
-    session.close()
+    session_postgresql.close()
+    session_mysql.close()
+
 
 
 if __name__ == '__main__':
