@@ -1,5 +1,6 @@
 import re
 from connectDB import connect_db
+from migration import run_flyway_migrations
 from models import Weather, AirQuality
 
 
@@ -27,18 +28,25 @@ def find_weather_info(session):
 
     if weather_info:
         print("\n------------------------------------------------------------\n")
-        print(f"\nПогода в {weather_info.country} на {weather_info.last_updated}:")
-        print(f"  Швидкість вітру: {weather_info.wind_kph} км/год")
-        print(f"  Напрям вітру: {weather_info.wind_direction.name}")
-        print(f"  Час сходу сонця: {weather_info.sunrise}")
+        print(f"\nWether in {weather_info.country} on {weather_info.last_updated}:")
+        print(f" wind_degree: {weather_info.wind_degree}")
+        print(f" wind_kph: {weather_info.wind_kph}")
+        print(f" wind_direction: {weather_info.wind_direction.name}")
+        print(f" sunrise: {weather_info.sunrise}")
         print("\n------------------------------------------------------------\n")
 
 
         if weather_info.air_quality:
             print("\n------------------------------------------------------------\n")
-            print("\nЯкість повітря:")
-            print(f"  CO: {weather_info.air_quality.air_quality_carbon_monoxide}")
-            print(f"  Озон: {weather_info.air_quality.air_quality_ozone}")
+            print("\nСтан повітря:")
+            print(f" air_quality_carbon_monoxide: {weather_info.air_quality.air_quality_carbon_monoxide}")
+            print(f" air_quality_ozone: {weather_info.air_quality.air_quality_ozone}")
+            print(f" air_quality_nitrogen_dioxide: {weather_info.air_quality.air_quality_nitrogen_dioxide}")
+            print(f" air_quality_sulphur_dioxide: {weather_info.air_quality.air_quality_sulphur_dioxide}")
+            print(f" air_quality_pm2_5: {weather_info.air_quality.air_quality_pm2_5}")
+            print(f" air_quality_pm10: {weather_info.air_quality.air_quality_pm10}")
+            print(f" air_quality_us_epa_index: {weather_info.air_quality.air_quality_us_epa_index}")
+            print(f" air_quality_gb_defra_index: {weather_info.air_quality.air_quality_gb_defra_index}")
             print(f"  Чи варто виходити на вулицю: {'Так' if weather_info.air_quality.going_outside else 'Ні'}")
             print("\n------------------------------------------------------------\n")
         else:
@@ -60,6 +68,8 @@ def main():
     #
     #
     # read_data(Session)
+
+    run_flyway_migrations()
 
     session = Session()
 
