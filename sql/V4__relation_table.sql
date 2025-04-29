@@ -1,17 +1,16 @@
---зовнішній ключ до таблиці weather
 ALTER TABLE weather
 ADD COLUMN air_quality_id INT;
 
---зовнішній ключ для зв'язку з таблицею air_quality
+UPDATE weather
+SET air_quality_id = (
+    SELECT air_quality.id
+    FROM air_quality
+    WHERE air_quality.id = weather.id
+);
+
 ALTER TABLE weather
 ADD CONSTRAINT fk_air_quality
 FOREIGN KEY (air_quality_id) REFERENCES air_quality(id);
-
-UPDATE weather w
-SET air_quality_id = aq.id
-FROM air_quality aq
-WHERE w.id = aq.weather_id;
-
 
 
 
