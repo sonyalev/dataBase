@@ -11,9 +11,9 @@ def main():
     conn, cursor, engine, Session = connect_db()
 
 
-    #create_table(engine)
+    create_table(engine)
 
-    #read_data(Session)
+    read_data(Session)
 
     run_flyway_migrations()
 

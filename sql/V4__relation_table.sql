@@ -1,3 +1,5 @@
+ALTER TABLE air_quality ALTER COLUMN id SET DATA TYPE INT;
+
 ALTER TABLE weather
 ADD COLUMN air_quality_id INT;
 
