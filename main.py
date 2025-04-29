@@ -1,7 +1,10 @@
 import re
+from Demos.win32ts_logoff_disconnected import session
+from sqlalchemy import Table, MetaData, inspect, select, text
 from connectDB import connect_db
 from migration import run_flyway_migrations
-from models import Weather, AirQuality
+from modelsAfterRefactoring import Weather, AirQuality
+from sqlalchemy.orm import sessionmaker
 
 
 def find_weather_info(session):
@@ -21,14 +24,14 @@ def find_weather_info(session):
             print("Не правильно введені дані. Введіть дату у форматі YYYY-MM-DD")
 
 
-    weather_info = session.query(Weather).join(AirQuality, AirQuality.weather_id == Weather.id).filter(
+    weather_info = session.query(Weather).join(AirQuality, AirQuality.id == Weather.id).filter(
         Weather.country == country_input,
         Weather.last_updated == date_input
     ).first()
 
     if weather_info:
         print("\n------------------------------------------------------------\n")
-        print(f"\nWether in {weather_info.country} on {weather_info.last_updated}:")
+        print(f"\nweather in {weather_info.country} on {weather_info.last_updated}:")
         print(f" wind_degree: {weather_info.wind_degree}")
         print(f" wind_kph: {weather_info.wind_kph}")
         print(f" wind_direction: {weather_info.wind_direction.name}")
@@ -38,7 +41,7 @@ def find_weather_info(session):
 
         if weather_info.air_quality:
             print("\n------------------------------------------------------------\n")
-            print("\nСтан повітря:")
+            print("\nair_quality")
             print(f" air_quality_carbon_monoxide: {weather_info.air_quality.air_quality_carbon_monoxide}")
             print(f" air_quality_ozone: {weather_info.air_quality.air_quality_ozone}")
             print(f" air_quality_nitrogen_dioxide: {weather_info.air_quality.air_quality_nitrogen_dioxide}")
@@ -64,12 +67,11 @@ def main():
     conn, cursor, engine, Session = connect_db()
 
 
-    # migrate(engine)
-    #
-    #
+    # create_table(engine)
+
     # read_data(Session)
 
-    run_flyway_migrations()
+    # run_flyway_migrations()
 
     session = Session()
 
