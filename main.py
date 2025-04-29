@@ -1,7 +1,7 @@
 from connectDB import connect_db
 from readData import read_data
 from createDB import create_database
-from migration import migrate, run_flyway_migrations
+from migration import create_table, run_flyway_migrations
 
 def main():
 
@@ -11,9 +11,9 @@ def main():
     conn, cursor, engine, Session = connect_db()
 
 
-    # migrate(engine)
+    #create_table(engine)
 
-    # read_data(Session)
+    #read_data(Session)
 
     run_flyway_migrations()
 
