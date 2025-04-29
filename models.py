@@ -1,10 +1,9 @@
-from sqlalchemy import Column, String, Integer, Float, Enum, Date, Time, ForeignKey, Boolean
+from sqlalchemy import Column, String, Integer, Float, Enum, Date, Time
 import enum
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import declarative_base
+
 
 Base = declarative_base()
-
-
 class WindDirection(enum.Enum):
     N = "N"
     NNW = "NNW"
@@ -23,12 +22,16 @@ class WindDirection(enum.Enum):
     NW = "NW"
     WNW = "WNW"
 
-
-class AirQuality(Base):
-    __tablename__ = "air_quality"
+class Weather(Base):
+    __tablename__ = 'weather'
 
     id = Column(Integer, primary_key=True)
-    weather_id = Column(Integer)
+    country = Column(String(100))
+    wind_degree = Column(Integer)
+    wind_kph = Column(Float)
+    wind_direction = Column(Enum(WindDirection))
+    last_updated = Column(Date)
+    sunrise = Column(Time)
     air_quality_carbon_monoxide = Column(Float)
     air_quality_ozone = Column(Float)
     air_quality_nitrogen_dioxide = Column(Float)
@@ -37,29 +40,6 @@ class AirQuality(Base):
     air_quality_pm10 = Column(Float)
     air_quality_us_epa_index = Column(Integer)
     air_quality_gb_defra_index = Column(Integer)
-    going_outside = Column(Boolean)
-
-
-
-
-
-class Weather(Base):
-    __tablename__ = 'weather'
-
-    id = Column(Integer, primary_key=True)
-    country = Column(String(255))
-    wind_degree = Column(Integer)
-    wind_kph = Column(Float)
-    wind_direction = Column(Enum(WindDirection))
-    last_updated = Column(Date)
-    sunrise = Column(Time)
-
-
-    #зовнішній ключ до таблиці air_quality
-    air_quality_id = Column(Integer, ForeignKey("air_quality.id"))
-
-    #встановлення зв'язку з таблицею air_quality
-    air_quality = relationship("AirQuality")
 
 
 
