@@ -1,4 +1,4 @@
-from connectDB import connect_db
+from connectDB import connect_db_PostgreSQL
 from readData import read_data
 from createDB import create_database
 from migration import create_table, run_flyway_migrations
@@ -9,7 +9,7 @@ def main():
     # create_database()
 
     # підключаємось до бази та отримуємо об'єкти
-    conn, cursor, engine, Session = connect_db()
+    conn, cursor, engine, Session = connect_db_PostgreSQL()
 
     # create_table(engine)
 
