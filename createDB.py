@@ -1,6 +1,6 @@
 import psycopg2
 from sqlalchemy.dialects import mysql
-
+#import mysql.connector
 
 def create_database():
 
@@ -21,7 +21,6 @@ def create_database():
 
 
 def create_database_MySQL():
-
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -29,11 +28,10 @@ def create_database_MySQL():
     )
 
     cursor = conn.cursor()
-
-
     cursor.execute("CREATE DATABASE IF NOT EXISTS bdlab3")
+
+    print("Базу даних 'bdlab3' створено (або вона вже існує).")
 
     cursor.close()
     conn.close()
 
-create_database()
