@@ -25,6 +25,7 @@ def main():
 
     # run_flyway_migrations()
 
+
     session = Session()
 
     find_weather_info(session)
