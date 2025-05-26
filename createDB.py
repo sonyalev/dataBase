@@ -1,7 +1,7 @@
 import psycopg2
 
 
-def create_database():
+def create_database_PostgreSQL():
 
     conn = psycopg2.connect(
         dbname="postgres",
