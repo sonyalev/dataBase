@@ -25,7 +25,7 @@ class WindDirection(enum.Enum):
 class AirQuality(Base):
     __tablename__ = "air_quality"
 
-    id = Column(Integer, primary_key=True)
+    weather_id = Column(Integer, ForeignKey('weather.id'), primary_key=True)
     air_quality_carbon_monoxide = Column(Float)
     air_quality_ozone = Column(Float)
     air_quality_nitrogen_dioxide = Column(Float)
@@ -35,6 +35,8 @@ class AirQuality(Base):
     air_quality_us_epa_index = Column(Integer)
     air_quality_gb_defra_index = Column(Integer)
     going_outside = Column(Boolean)
+
+    weather = relationship("Weather", back_populates="air_quality")
 
 
 
@@ -51,9 +53,6 @@ class Weather(Base):
     last_updated = Column(Date)
     sunrise = Column(Time)
 
+    air_quality = relationship("AirQuality", back_populates="weather")
 
-    #зовнішній ключ до таблиці air_quality
-    air_quality_id = Column(Integer, ForeignKey("air_quality.id"))
 
-    #встановлення зв'язку з таблицею air_quality
-    air_quality = relationship("AirQuality")

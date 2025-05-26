@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 
-def connect_db():
+def connect_db_PostgreSQL():
 
     conn = psycopg2.connect("dbname=bdlab3 user=postgres password=admin")
     cursor = conn.cursor()

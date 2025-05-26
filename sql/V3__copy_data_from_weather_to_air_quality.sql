@@ -1,4 +1,5 @@
 INSERT INTO air_quality (
+    weather_id,
     air_quality_carbon_monoxide,
     air_quality_ozone,
     air_quality_nitrogen_dioxide,
@@ -9,6 +10,7 @@ INSERT INTO air_quality (
     air_quality_gb_defra_index
 )
 SELECT
+    id,
     air_quality_carbon_monoxide,
     air_quality_ozone,
     air_quality_nitrogen_dioxide,
